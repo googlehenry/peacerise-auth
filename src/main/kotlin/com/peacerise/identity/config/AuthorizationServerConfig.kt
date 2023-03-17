@@ -5,15 +5,14 @@ import com.nimbusds.jose.jwk.JWKSet
 import com.nimbusds.jose.jwk.RSAKey
 import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.SecurityContext
-import com.peacerise.identity.utils.Jwks
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
+import org.springframework.core.io.ClassPathResource
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactory
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -34,6 +33,9 @@ import org.springframework.security.oauth2.server.authorization.settings.Authori
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
+import java.security.KeyStore
+import java.security.interfaces.RSAPrivateKey
+import java.security.interfaces.RSAPublicKey
 import java.util.*
 
 @Configuration(proxyBeanMethods = false)
@@ -96,7 +98,7 @@ class AuthorizationServerConfig {
 
     @Bean
     fun jwkSource(): JWKSource<SecurityContext?>? {
-        val rsaKey: RSAKey = Jwks.generateRsa()
+        val rsaKey: RSAKey = KeyStoreConfig.loadKeyPairFromKeyStore()
         val jwkSet = JWKSet(rsaKey)
         return JWKSource { jwkSelector: JWKSelector, securityContext: SecurityContext? ->
             jwkSelector.select(

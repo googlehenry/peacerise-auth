@@ -1,0 +1,40 @@
+keytool -genkeypair -alias henry_key_pair_2003_03_17 -keyalg RSA -keystore henry_key_store.pkcs12.jks -storepass 123test321 -keypass 123test321 -storetype PKCS12
+keytool -list -keystore henry_key_store.pkcs12.jks -storepass 123test321
+keytool -export -keystore henry_key_store.pkcs12.jks -alias henry_key_pair_2003_03_17 -file henry_key_pair_2003_03_17_public_key.cer
+keytool -list -rfc --keystore henry_key_store.pkcs12.jks | openssl x509 -inform pem -pubkey
+
+```
+$ keytool -list -rfc --keystore henry_key_store.pkcs12.jks | openssl x509 -inform pem -pubkey
+Enter keystore password:  123test321
+```
+```
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1dly7bpeuGlCLt8gJdWH
+urSUMFxPPPqZPKXvmla5w5leZLa93xkQDxGRdBlWezNCCJquRqsqpQTgYtFfdAX5
+EFlFHM0sq1bontkMGxwhRUv4vYKtAGT7jp+ev+JTZm0Jr45BlB1sjObAz3ue3S/U
+aqZe2fYx75lVkykG/MIvEf07cGUJRK0n7lw2++DwJGl/p+itFpQfBnKMe7G1qNwO
+6z83rfovFM1jPG6U+HdvfxrZn143p0DOhTnRm0yvLiGYSKbAHigI+kxztZxL1soi
+E4C3yMiwb2NDMw+cyyvuZPf+mhH1BFmSXdYwf4qlmcdZW4UnOezY/T2virZyyqx8
+HwIDAQAB
+-----END PUBLIC KEY-----
+-----BEGIN CERTIFICATE-----
+MIIDTTCCAjWgAwIBAgIEFAb4KDANBgkqhkiG9w0BAQsFADBXMQswCQYDVQQGEwJj
+bjELMAkGA1UECBMCc2gxCzAJBgNVBAcTAnNoMQ4wDAYDVQQKEwVoZW5yeTEOMAwG
+A1UECxMFaGVucnkxDjAMBgNVBAMTBWhlbnJ5MB4XDTIzMDMxNzAwMzAyNVoXDTIz
+MDYxNTAwMzAyNVowVzELMAkGA1UEBhMCY24xCzAJBgNVBAgTAnNoMQswCQYDVQQH
+EwJzaDEOMAwGA1UEChMFaGVucnkxDjAMBgNVBAsTBWhlbnJ5MQ4wDAYDVQQDEwVo
+ZW5yeTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANXZcu26XrhpQi7f
+ICXVh7q0lDBcTzz6mTyl75pWucOZXmS2vd8ZEA8RkXQZVnszQgiarkarKqUE4GLR
+X3QF+RBZRRzNLKtW6J7ZDBscIUVL+L2CrQBk+46fnr/iU2ZtCa+OQZQdbIzmwM97
+nt0v1GqmXtn2Me+ZVZMpBvzCLxH9O3BlCUStJ+5cNvvg8CRpf6forRaUHwZyjHux
+tajcDus/N636LxTNYzxulPh3b38a2Z9eN6dAzoU50ZtMry4hmEimwB4oCPpMc7Wc
+S9bKIhOAt8jIsG9jQzMPnMsr7mT3/poR9QRZkl3WMH+KpZnHWVuFJzns2P09r4q2
+csqsfB8CAwEAAaMhMB8wHQYDVR0OBBYEFDFiMWhgrePynPdY1MeBNxAAehOkMA0G
+CSqGSIb3DQEBCwUAA4IBAQAuDLB+BSB5w04rlxT01Quqp3xtQaznqbU2C05fZ+zf
+eyKZXw+W6Jjnau64AgJ4mWGTHRPhM5krJMRfOM3dnpcgWdyYnVXtf5ysUjfbXq+R
+CWNND31KeSIZJNnKAADdOY8N38RBZ19qIR1f6/aUXS4ck3yvXJ+d+Drlr42mMU62
+mvDNxR/S/WAToxeQGvNlbuqMXXwdS7/1xsRNY3lqJjvXFHjLIyzC3hSYaID+XEd1
+pq+Drp10Oidi4o8vzi4ImcW2b6xe7DD6KY700kbKJ56yRrfuhO5WtDqxSh3Fa+Xr
+f/pn1q0W9pRo4B0RQSNT1mcNmsxP9JgqKPrYndCkiGKa
+-----END CERTIFICATE-----
+```
