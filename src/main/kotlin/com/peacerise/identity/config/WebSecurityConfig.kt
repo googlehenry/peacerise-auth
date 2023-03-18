@@ -42,6 +42,6 @@ class WebSecurityConfig {
 
     @Bean
     fun users():UserDetailsService{
-        return InMemoryUserDetailsManager(User.withDefaultPasswordEncoder().username("user1").password("password").roles("USER").build())
+        return InMemoryUserDetailsManager(User.withDefaultPasswordEncoder().username("user1").password("password").roles("USER").authorities("ROLE_SITE_USER","ROLE_PROXY_AS").build())
     }
 }
