@@ -66,9 +66,24 @@ class AuthorizationServerConfig {
             .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
             .build()
 
+        val registeredClientSiteLogin: RegisteredClient = RegisteredClient.withId(UUID.randomUUID().toString())
+            .clientId("login-client")
+            .clientSecret("{noop}login-secret")
+            .clientName("login-client-app")
+            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+            .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+            .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+            .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+            .redirectUri("http://127.0.0.1:8080/authorized")
+            .scope("site-login.read")
+            .scope("site-login.write")
+            .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())
+            .build()
+
         // Save registered client in db as if in-memory
         val registeredClientRepository = JdbcRegisteredClientRepositoryEnhanced(jdbcTemplate)
         registeredClientRepository.save(registeredClient)
+        registeredClientRepository.save(registeredClientSiteLogin)
         return registeredClientRepository
     }
     // @formatter:on
