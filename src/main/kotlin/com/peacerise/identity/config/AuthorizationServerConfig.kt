@@ -25,9 +25,11 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings
+import org.springframework.security.oauth2.server.authorization.settings.TokenSettings
 import org.springframework.security.oauth2.server.authorization.token.*
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
+import java.time.Duration
 import java.util.*
 
 
@@ -74,6 +76,7 @@ class AuthorizationServerConfig {
             .redirectUri("http://127.0.0.1:8080/peacerise/authorized")
             .scope("site-login.read")
             .scope("site-login.write")
+            .tokenSettings(TokenSettings.builder().accessTokenTimeToLive(Duration.ofHours(2)).build())
             .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())
             .build()
 
