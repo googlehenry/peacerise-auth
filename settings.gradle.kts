@@ -1,1 +1,1 @@
-rootProject.name = "peacerise-identity"
+rootProject.name = "peacerise-authorization-center"
