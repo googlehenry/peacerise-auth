@@ -1,12 +1,12 @@
 ### Oauth2.0 四种模式
 复杂程度由大至小：授权码模式 > 隐式授权模式(废止) > 密码模式(废止) > 客户端模式
 
-### 查看clients
+#### 查看App中hardcoded clients
 ```agsl
 http://127.0.0.1:9000/view/clients
 ```
 
-### API Examples:
+#### API Examples:
  1. client_credential (Get app token)
 ```
 
@@ -53,4 +53,49 @@ resp:
     "token_type": "Bearer",
     "expires_in": 300
 }
+
+```
+
+
+#### Spring Security Architecture (https://docs.spring.io/spring-security/reference/servlet/architecture.html)
+
+```agsl
+Security Filters
+The Security Filters are inserted into the FilterChainProxy with the SecurityFilterChain API. The order of Filter instances matters. It is typically not necessary to know the ordering of Spring Security’s Filter instances. However, there are times that it is beneficial to know the ordering.
+
+The following is a comprehensive list of Spring Security Filter ordering:
+---------
+ForceEagerSessionCreationFilter
+ChannelProcessingFilter
+WebAsyncManagerIntegrationFilter
+SecurityContextPersistenceFilter
+HeaderWriterFilter
+CorsFilter
+CsrfFilter
+LogoutFilter
+OAuth2AuthorizationRequestRedirectFilter
+Saml2WebSsoAuthenticationRequestFilter
+X509AuthenticationFilter
+AbstractPreAuthenticatedProcessingFilter
+CasAuthenticationFilter
+OAuth2LoginAuthenticationFilter
+Saml2WebSsoAuthenticationFilter
+UsernamePasswordAuthenticationFilter
+DefaultLoginPageGeneratingFilter
+DefaultLogoutPageGeneratingFilter
+ConcurrentSessionFilter
+DigestAuthenticationFilter
+BearerTokenAuthenticationFilter
+BasicAuthenticationFilter
+RequestCacheAwareFilter
+SecurityContextHolderAwareRequestFilter
+JaasApiIntegrationFilter
+RememberMeAuthenticationFilter
+AnonymousAuthenticationFilter
+OAuth2AuthorizationCodeGrantFilter
+SessionManagementFilter
+ExceptionTranslationFilter
+FilterSecurityInterceptor
+SwitchUserFilter
+---------
 ```
