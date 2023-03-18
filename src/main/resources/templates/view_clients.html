@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clients</title>
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/dataTables.jqueryui.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/scroller/2.1.1/css/scroller.jqueryui.min.css">
+
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.4/js/dataTables.jqueryui.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/scroller/2.1.1/js/dataTables.scroller.min.js"></script>
+
+    <script type="application/javascript">
+        $(document).ready(function() {
+            $('#example').DataTable( {
+                ajax: {
+                    "url": "/api/client/list",
+                    "dataSrc": ""
+                },
+                columns: [
+                    { data: 'id' },
+                    { data: 'clientId' },
+                    { data: 'clientName' },
+                    { data: 'clientSecret' },
+                    { data: 'clientIdIssuedAt' },
+                    { data: 'scopes' },
+                    { data: 'redirectUris' }
+                ],
+            } );
+        } );
+
+    </script>
+</head>
+<body>
+    hi, you're about to be there...
+    <table id="example" class="display nowrap" style="width:100%">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Client Id</th>
+            <th>Client Name</th>
+            <th>Client Secret</th>
+            <th>Issued At</th>
+            <th>Scopes</th>
+            <th>Redirect Uri(s)</th>
+        </tr>
+        </thead>
+    </table>
+</body>
+</html>

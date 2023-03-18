@@ -1,6 +1,10 @@
 ### Oauth2.0 四种模式
 复杂程度由大至小：授权码模式 > 隐式授权模式(废止) > 密码模式(废止) > 客户端模式
 
+### 查看clients
+```agsl
+http://127.0.0.1:9000/view/clients
+```
 
 ### API Examples:
  1. client_credential (Get app token)
@@ -41,4 +45,12 @@ curl --location '127.0.0.1:9000/oauth2/token' \
 --form 'grant_type="authorization_code"' \
 --form 'redirect_uri="http://127.0.0.1:8080/authorized"'
 
+resp:
+{
+    "access_token": "eyJraWQiOiIwMjBiYWRmYy04OWFlLTQ3MjAtYWQ1Ni0zYzExNzg2ZTkzZTUiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImF1ZCI6Im1lc3NhZ2luZy1jbGllbnQiLCJuYmYiOjE2NzkxMTAwNjUsInNjb3BlIjpbIm1lc3NhZ2UucmVhZCJdLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjkwMDAiLCJleHAiOjE2NzkxMTAzNjUsImlhdCI6MTY3OTExMDA2NX0.jd-G87YE8mhoZPRmCBFPZMUyZJnxYafNvzMk-luCLDGVf0-MksR8OMOkIisVzm8-TuDC6r2OhKrkOSf5YCADUtR8VjGZEXenCfn--YJCDKfFl2L3OYr5SGYrq2Qwqp1I8COBSnoEn4XDqMj1p1gGYqSnAM0MmYPpo4xi7h1OYFVm2L6AXz2aUhCLlAZHXFU6gXn43FFkM3vczQoCKChuMJu-j6-K-tHP0V5G5vvsxyH3sERDi5kE3GnnQ_Y8m21BUz1Yi5cQSTn5_DaYU6uDlPxFb28wrg6hRjhNPGQp5r6P8vOe-RaBXVJIGHHZXJyvn2eoh4VaO1bSisw5uMTglg",
+    "refresh_token": "9auF2_nWoHk1yMXndg2Za2Wvgk23WGzHyFKte9hmr5Fzb4jZCg45ISaCjNt2IasPKSTS0QF2vCINM6C0ozAQzQkFggRlIq85iomuZfzrTPVFBrWhLbuRkLsuiUBGZncY",
+    "scope": "message.read",
+    "token_type": "Bearer",
+    "expires_in": 300
+}
 ```

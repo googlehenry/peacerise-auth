@@ -22,6 +22,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.security:spring-security-oauth2-authorization-server:1.0.1")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
