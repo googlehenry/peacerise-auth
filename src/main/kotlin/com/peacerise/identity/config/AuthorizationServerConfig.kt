@@ -69,7 +69,7 @@ class AuthorizationServerConfig {
             .scope(OidcScopes.PROFILE)
             .scope("message.read")
             .scope("message.write")
-            .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())
+            .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
             .build()
 
         // Save registered client in db as if in-memory
