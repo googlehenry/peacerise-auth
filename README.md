@@ -56,6 +56,24 @@ resp:
 
 ```
 
+3. Customized Password mode (注意自定义类是java source folder下面的, 不要放到kotlin source folder中, 运行时缺少class)
+```agsl
+curl --location 'localhost:9000/oauth2/token' \
+--header 'Authorization: Basic bG9naW4tY2xpZW50OmxvZ2luLXNlY3JldA==' \
+--form 'grant_type="password"' \
+--form 'username="user1"' \
+--form 'password="password"' \
+--form 'scope="user.data.read"'
+
+{
+    "access_token": "eyJraWQiOiJiMzg2NzIzYy0zMjhkLTRmMWEtOTQxNC04Yjk2Y2NiN2JhNGIiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImF1ZCI6ImxvZ2luLWNsaWVudCIsIm5iZiI6MTY3OTIwNTYwOSwic2NvcGUiOlsidXNlci5kYXRhLnJlYWQiXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDAwIiwiZXhwIjoxNjc5MjEyODA5LCJ0eXBlIjoiVVNFUl9UT0tFTiIsImlhdCI6MTY3OTIwNTYwOX0.VR7xgV6-fi40WT2ErqU3nh5dwcsufCe76eVX5FNS-SUQBYnJV-BJDjbqGpSpwnFzwahyJW5_vD5knLPaxbo5t7EKl2VYJ89m6wmbv6dhrZJF4SpslK-Ckh50-Pl22JQgC4EGKKKRNSFB3RX0bn3xSYbaIPu86dKJeQah1OKgxupT5w_V3v_F0fwyqJwrCndMhAKOZxjLnfydSVXqSwNGOog-eFhqnmJfeZQuM6L3fm8PErV3slLEL6i3N94Vt-Itg0qakG9yB5M4Hdfn2VxXW9A08XOE-Fm1EEEaARDHGgsVL1XNerfJzMXtCR5v1ufzfbLwpxRCt8xHgSIaDDDEBg",
+    "expires_in": 7200,
+    "refresh_token": "82Y3nWqcqEZLZA7KZ7a69AZdTNKZkq127LQwqgQz7DJhZpjRn22VDGB2epaIo5jnSX3N8TKnPZF6Xz-Ix1PiJ6mh___dmyY5b7T2oKfUV5pE-mLQQGVsPr5Iw72jyfRg",
+    "scope": "user.data.read",
+    "token_type": "Bearer"
+}
+```
+
 
 #### Spring Security Architecture (https://docs.spring.io/spring-security/reference/servlet/architecture.html)
 

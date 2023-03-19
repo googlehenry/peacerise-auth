@@ -16,6 +16,8 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.oauth2.core.AuthorizationGrantType
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod
 import org.springframework.security.oauth2.server.authorization.*
@@ -23,10 +25,12 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer
+import com.peacerise.identity.auth.extend.password.OAuth2ResourceOwnerPasswordCredentialsAuthenticationProviderBuilder
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings
 import org.springframework.security.oauth2.server.authorization.token.*
+import com.peacerise.identity.auth.extend.password.OAuth2ResourceOwnerPasswordCredentialsAuthenticationConverter
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
 import java.time.Duration
@@ -38,13 +42,30 @@ class AuthorizationServerConfig {
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    fun authorizationServerSecurityFilterChain(http: HttpSecurity): SecurityFilterChain {
+    fun authorizationServerSecurityFilterChain(
+        http: HttpSecurity,
+        userDetailService: UserDetailsService,
+        passwordEncoder: PasswordEncoder
+    ): SecurityFilterChain {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http)
         http.getConfigurer(OAuth2AuthorizationServerConfigurer::class.java).oidc(Customizer.withDefaults())
         http.exceptionHandling {
             it.authenticationEntryPoint(LoginUrlAuthenticationEntryPoint("/login"))
         }.oauth2ResourceServer {
             it.jwt()
+        }
+
+        http.getConfigurer(OAuth2AuthorizationServerConfigurer::class.java).tokenEndpoint {
+            it.authenticationProvider(
+                OAuth2ResourceOwnerPasswordCredentialsAuthenticationProviderBuilder(
+                    http,
+                    userDetailService,
+                    passwordEncoder
+                ).build()
+            )
+            it.accessTokenRequestConverter(
+                OAuth2ResourceOwnerPasswordCredentialsAuthenticationConverter()
+            )
         }
         return http.build()
     }
@@ -73,6 +94,7 @@ class AuthorizationServerConfig {
             .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
             .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
             .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+            .authorizationGrantType(AuthorizationGrantType.PASSWORD)
             .redirectUri("http://127.0.0.1:8080/peacerise/authorized")
             .scope(TokenScope.USER_DATA_READ.value)
             .scope(TokenScope.USER_DATA_WRITE.value)

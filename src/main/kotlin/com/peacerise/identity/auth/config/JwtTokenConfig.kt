@@ -30,7 +30,7 @@ class JwtTokenConfig {
     }
 
     @Bean
-    fun tokenGenerator(jwtEncoder: JwtEncoder, jwtCustomizer: OAuth2TokenCustomizer<JwtEncodingContext>): OAuth2TokenGenerator<*>? {
+    fun tokenGenerator(jwtEncoder: JwtEncoder, jwtCustomizer: OAuth2TokenCustomizer<JwtEncodingContext>): OAuth2TokenGenerator<*> {
         val jwtGenerator = JwtGenerator(jwtEncoder)
         jwtGenerator.setJwtCustomizer(jwtCustomizer)
         val accessTokenGenerator = OAuth2AccessTokenGenerator()
