@@ -3,6 +3,7 @@ package com.peacerise.identity.auth.config
 import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.SecurityContext
 import com.peacerise.identity.auth.extend.proxy.OAuth2ResourceAdminAppProxyAuthenticationProvider.PROXY_BY_APP
+import com.peacerise.identity.auth.extend.proxybyuser.OAuth2ResourceAdminUserProxyAuthenticationProvider.PROXY_BY_USER
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.core.Authentication
@@ -31,7 +32,10 @@ class JwtTokenConfig {
     }
 
     @Bean
-    fun tokenGenerator(jwtEncoder: JwtEncoder, jwtCustomizer: OAuth2TokenCustomizer<JwtEncodingContext>): OAuth2TokenGenerator<*> {
+    fun tokenGenerator(
+        jwtEncoder: JwtEncoder,
+        jwtCustomizer: OAuth2TokenCustomizer<JwtEncodingContext>
+    ): OAuth2TokenGenerator<*> {
         val jwtGenerator = JwtGenerator(jwtEncoder)
         jwtGenerator.setJwtCustomizer(jwtCustomizer)
         val accessTokenGenerator = OAuth2AccessTokenGenerator()
@@ -54,15 +58,19 @@ class JwtTokenConfig {
                 // Customize headers/claims for access_token
 //                headers.header("customerHeader", "这是一个自定义header")
                 //claims.claim("authorities", principal.authorities.map { it.authority })
+                principal.authorities.map { it.authority }.firstOrNull { it.startsWith("operator_") }?.let {
+                    claims.claim("operator", it)
+                }
             } else if (context.tokenType.value == OidcParameterNames.ID_TOKEN) {
                 // Customize headers/claims for id_token
             }
 
             claims.claim(OAuth2ParameterNames.SCOPE, scopes)
 
-            val type = when(context.authorizationGrantType){
+            val type = when (context.authorizationGrantType) {
                 AuthorizationGrantType.CLIENT_CREDENTIALS -> "APP_TOKEN"
-                AuthorizationGrantType(PROXY_BY_APP) ->"UT_PROXY_BY_APP"
+                AuthorizationGrantType(PROXY_BY_APP) -> "UT_PROXY_BY_APP"
+                AuthorizationGrantType(PROXY_BY_USER) -> "UT_PROXY_BY_USER"
                 else -> "USER_TOKEN"
             }
             claims.claim("type", type)

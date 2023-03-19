@@ -38,7 +38,10 @@ class WebSecurityConfig {
 
     @Bean
     fun users():UserDetailsService{
-        return InMemoryUserDetailsManager(User.builder().username("user1").password("{noop}password").roles("USER").build())
+        return InMemoryUserDetailsManager(
+            User.builder().username("user1").password("{noop}password").roles("USER").build(),
+            User.builder().username("user2").password("{noop}password").roles("USER").build()
+            )
     }
     @Bean
     fun passwordEncoder(): PasswordEncoder{

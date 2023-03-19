@@ -33,6 +33,8 @@ import com.peacerise.identity.auth.extend.password.OAuth2ResourceOwnerPasswordCr
 import com.peacerise.identity.auth.extend.password.OAuth2ResourceOwnerPasswordCredentialsAuthenticationProvider
 import com.peacerise.identity.auth.extend.proxy.OAuth2ResourceAdminAppProxyAuthenticationConverter
 import com.peacerise.identity.auth.extend.proxy.OAuth2ResourceAdminAppProxyAuthenticationProvider
+import com.peacerise.identity.auth.extend.proxybyuser.OAuth2ResourceAdminUserProxyAuthenticationConverter
+import com.peacerise.identity.auth.extend.proxybyuser.OAuth2ResourceAdminUserProxyAuthenticationProvider
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
 import java.time.Duration
@@ -82,6 +84,21 @@ class AuthorizationServerConfig {
             )
             it.accessTokenRequestConverter(
                 OAuth2ResourceAdminAppProxyAuthenticationConverter()
+            )
+        }
+
+        //Proxy login by user name password
+        //todo 如果新加一个不在AuthorizationGrantType中的,那么就不限制,否则需要在注册客户端时注册再允许!!! tbd 有时间可以看看这块代码
+        http.getConfigurer(OAuth2AuthorizationServerConfigurer::class.java).tokenEndpoint {
+            it.authenticationProvider(
+                OAuth2ResourceAdminUserProxyAuthenticationProvider.Builder(
+                    http,
+                    userDetailService,
+                    passwordEncoder
+                ).build()
+            )
+            it.accessTokenRequestConverter(
+                OAuth2ResourceAdminUserProxyAuthenticationConverter()
             )
         }
         return http.build()

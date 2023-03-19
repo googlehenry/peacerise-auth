@@ -86,6 +86,20 @@ curl --location 'localhost:9000/oauth2/token' --header 'Authorization: Basic bG9
 }
 ```
 
+5. Customized Proxy mode as user with username/password (注意grant_type是proxy_by_user.)
+```agsl
+curl --location --request POST '127.0.0.1:9000/oauth2/token?username=user1&password=password&scope=user.data.read&grant_type=proxy_by_user&targetUser=user2' \
+--header 'Authorization: Basic bG9naW4tY2xpZW50OmxvZ2luLXNlY3JldA=='
+
+{
+    "access_token": "eyJraWQiOiJlMDVhZGI2MS01NGZjLTQ5ZjEtYjVmNS1jZjJlMDU2OWZiMjIiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImF1ZCI6ImxvZ2luLWNsaWVudCIsIm5iZiI6MTY3OTIxMzU5OSwic2NvcGUiOlsidXNlci5kYXRhLnJlYWQiXSwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMTo5MDAwIiwiZXhwIjoxNjc5MjIwNzk5LCJ0eXBlIjoiVVRfUFJPWFlfQllfVVNFUiIsImlhdCI6MTY3OTIxMzU5OSwib3BlcmF0b3IiOiJvcGVyYXRvcl91c2VyMSJ9.hx6N4wx1UL2DF0zwhwRNLAD2ns75x3h_qRRoxvt03sFDYyL_xnp9osMaOwq__sNacQFwacafEXQUQYoUIxFaEphJARUU7ngYLtwv9vQBz9TuquobvSEY_6mdwo6Mlz-IqTbxlVcfVfw_9law6_Eb0QsOFhZDpc4YdgHbp76PL7UJmXghfvqUdinJ_F4UZGyjR27QEo_ug4EXu2DnN5LmFPmVdEIOn9Va1LjjXzgysGDUQoIRNj_C8ftuU1HG7FhtOZQUaTZVWnxW-fnmw-suJbW1JfK_qlpuBKxPzH_EpU5X7Ui2DjHIki4iiDfMuYK9GQjYaXA3JSinz8rh3xEZrA",
+    "refresh_token": "G-PukE8GnceRN5MoTvNQMTRVIBVgm_B5b7P2f77FXGr6j02dA4GA-_5oiTOrBMGSMlx-a3nIsLSHcwryfAw5oDLeBohObaWyUpcVLgCmZv9XhlSK6UkXhU3s7kfp3Ddx",
+    "scope": "user.data.read",
+    "token_type": "Bearer",
+    "expires_in": 7199
+}
+```
+
 #### Spring Security Architecture (https://docs.spring.io/spring-security/reference/servlet/architecture.html)
 
 ```agsl
