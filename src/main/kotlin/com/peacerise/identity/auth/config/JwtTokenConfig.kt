@@ -49,7 +49,7 @@ class JwtTokenConfig {
         return OAuth2TokenCustomizer { context: JwtEncodingContext ->
             val headers: JwsHeader.Builder = context.jwsHeader
             val claims = context.claims
-            val scopes = context.authorizedScopes
+            val scopes = context.authorizedScopes.map { it }.toMutableSet()
 
 
             val principal = context.getPrincipal<Authentication>()
@@ -62,6 +62,10 @@ class JwtTokenConfig {
                 }
             } else if (context.tokenType.value == OidcParameterNames.ID_TOKEN) {
                 // Customize headers/claims for id_token
+            }
+
+            if(context.authorizationGrantType==AuthorizationGrantType.CLIENT_CREDENTIALS){
+                scopes.add("DEFAULT")
             }
 
             claims.claim(OAuth2ParameterNames.SCOPE, scopes)
