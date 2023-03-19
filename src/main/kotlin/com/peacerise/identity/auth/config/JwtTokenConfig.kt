@@ -1,4 +1,4 @@
-package com.peacerise.identity.config
+package com.peacerise.identity.auth.config
 
 import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.SecurityContext
@@ -45,15 +45,18 @@ class JwtTokenConfig {
         return OAuth2TokenCustomizer { context: JwtEncodingContext ->
             val headers: JwsHeader.Builder = context.jwsHeader
             val claims = context.claims
+            val scopes = context.authorizedScopes
+
+
             val principal = context.getPrincipal<Authentication>()
             if (context.tokenType == OAuth2TokenType.ACCESS_TOKEN) {
                 // Customize headers/claims for access_token
 //                headers.header("customerHeader", "这是一个自定义header")
-                claims.claim("authorities", principal.authorities.map { it.authority })
+                //claims.claim("authorities", principal.authorities.map { it.authority })
             } else if (context.tokenType.value == OidcParameterNames.ID_TOKEN) {
                 // Customize headers/claims for id_token
             }
-            claims.claim(OAuth2ParameterNames.SCOPE, context.authorizedScopes)
+            claims.claim(OAuth2ParameterNames.SCOPE, scopes)
             claims.claim("type", if(context.authorizationGrantType== AuthorizationGrantType.CLIENT_CREDENTIALS) "APP_TOKEN" else "USER_TOKEN")
         }
     }

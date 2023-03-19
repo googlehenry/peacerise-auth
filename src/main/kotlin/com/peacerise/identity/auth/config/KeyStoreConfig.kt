@@ -1,5 +1,6 @@
-package com.peacerise.identity.config
+package com.peacerise.identity.auth.config
 
+import com.nimbusds.jose.jwk.KeyUse
 import com.nimbusds.jose.jwk.RSAKey
 import org.springframework.core.io.ClassPathResource
 import java.security.KeyStore
@@ -24,6 +25,7 @@ class KeyStoreConfig {
                 return RSAKey.Builder(publicKey)
                     .privateKey(privateKey)
                     .keyID(UUID.randomUUID().toString())
+                    .keyUse(KeyUse.SIGNATURE)
                     .build()
             }
 

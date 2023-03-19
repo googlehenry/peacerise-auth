@@ -1,6 +1,6 @@
-package com.peacerise.identity.portal
+package com.peacerise.identity.auth.portal
 
-import com.peacerise.identity.portal.enhanced.JdbcRegisteredClientRepositoryEnhanced
+import com.peacerise.identity.auth.portal.enhanced.JdbcRegisteredClientRepositoryEnhanced
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient
 import org.springframework.stereotype.Service

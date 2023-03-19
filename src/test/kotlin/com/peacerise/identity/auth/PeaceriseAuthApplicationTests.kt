@@ -1,10 +1,10 @@
-package com.peacerise.identity
+package com.peacerise.identity.auth
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class PeaceriseIdentityApplicationTests {
+class PeaceriseAuthApplicationTests {
 
     @Test
     fun contextLoads() {

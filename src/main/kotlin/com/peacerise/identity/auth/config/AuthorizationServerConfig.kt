@@ -1,11 +1,11 @@
-package com.peacerise.identity.config
+package com.peacerise.identity.auth.config
 
 import com.nimbusds.jose.jwk.JWKSelector
 import com.nimbusds.jose.jwk.JWKSet
 import com.nimbusds.jose.jwk.RSAKey
 import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.SecurityContext
-import com.peacerise.identity.portal.enhanced.JdbcRegisteredClientRepositoryEnhanced
+import com.peacerise.identity.auth.portal.enhanced.JdbcRegisteredClientRepositoryEnhanced
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.Ordered
@@ -74,8 +74,8 @@ class AuthorizationServerConfig {
             .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
             .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
             .redirectUri("http://127.0.0.1:8080/peacerise/authorized")
-            .scope("site-login.read")
-            .scope("site-login.write")
+            .scope(TokenScope.USER_DATA_READ.value)
+            .scope(TokenScope.USER_DATA_WRITE.value)
             .tokenSettings(TokenSettings.builder().accessTokenTimeToLive(Duration.ofHours(2)).build())
             .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())
             .build()
@@ -109,6 +109,8 @@ class AuthorizationServerConfig {
     fun jwkSource(): JWKSource<SecurityContext?>? {
         val rsaKey: RSAKey = KeyStoreConfig.loadKeyPairFromKeyStore()
         val jwkSet = JWKSet(rsaKey)
+
+        println(jwkSet.toPublicJWKSet().toString(true))
         return JWKSource { jwkSelector: JWKSelector, securityContext: SecurityContext? ->
             jwkSelector.select(
                 jwkSet

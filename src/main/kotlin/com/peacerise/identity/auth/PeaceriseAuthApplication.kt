@@ -1,11 +1,11 @@
-package com.peacerise.identity
+package com.peacerise.identity.auth
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class PeaceriseIdentityApplication
+class PeaceriseAuthApplication
 
 fun main(args: Array<String>) {
-    runApplication<PeaceriseIdentityApplication>(*args)
+    runApplication<PeaceriseAuthApplication>(*args)
 }

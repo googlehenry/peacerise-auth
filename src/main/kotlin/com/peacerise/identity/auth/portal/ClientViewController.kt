@@ -1,4 +1,4 @@
-package com.peacerise.identity.portal
+package com.peacerise.identity.auth.portal
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping

@@ -1,4 +1,4 @@
-package com.peacerise.identity.portal.enhanced
+package com.peacerise.identity.auth.portal.enhanced
 
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient
 

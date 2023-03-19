@@ -1,4 +1,4 @@
-package com.peacerise.identity.portal
+package com.peacerise.identity.auth.portal
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient
