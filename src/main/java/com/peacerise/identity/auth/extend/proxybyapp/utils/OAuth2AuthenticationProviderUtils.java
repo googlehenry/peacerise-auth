@@ -1,4 +1,4 @@
-package com.peacerise.identity.auth.extend.proxy.utils;
+package com.peacerise.identity.auth.extend.proxybyapp.utils;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;

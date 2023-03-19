@@ -2,12 +2,11 @@ package com.peacerise.identity.auth.config
 
 import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.SecurityContext
-import com.peacerise.identity.auth.extend.proxy.OAuth2ResourceAdminAppProxyAuthenticationProvider.PROXY_BY_APP
+import com.peacerise.identity.auth.extend.proxybyapp.OAuth2ResourceAdminAppProxyAuthenticationProvider.PROXY_BY_APP
 import com.peacerise.identity.auth.extend.proxybyuser.OAuth2ResourceAdminUserProxyAuthenticationProvider.PROXY_BY_USER
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.core.Authentication
-import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.oauth2.core.AuthorizationGrantType
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames
 import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames

@@ -110,7 +110,7 @@ public class OAuth2ResourceAdminUserProxyAuthenticationProvider implements Authe
             this.logger.trace("Validated token request parameters");
         }
 
-        //TODO 这是添加的代码, load target user info
+        //TODO 这是添加的代码, load target user info , 使用时可以加上限制,不能任意用户都可以proxy成别人.
         String operator = userDetails.getUsername();
         userDetails = this.userDetailsService.loadUserByUsername(resourceOwnerPasswordCredentialsAuthentication.getTargetUser());
         if(userDetails==null){

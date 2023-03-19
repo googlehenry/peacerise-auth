@@ -1,6 +1,6 @@
-package com.peacerise.identity.auth.extend.proxy;
+package com.peacerise.identity.auth.extend.proxybyapp;
 
-import com.peacerise.identity.auth.extend.proxy.utils.OAuth2EndpointUtils;
+import com.peacerise.identity.auth.extend.proxybyapp.utils.OAuth2EndpointUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
@@ -13,7 +13,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.*;
 
-import static com.peacerise.identity.auth.extend.proxy.OAuth2ResourceAdminAppProxyAuthenticationProvider.PROXY_BY_APP;
+import static com.peacerise.identity.auth.extend.proxybyapp.OAuth2ResourceAdminAppProxyAuthenticationProvider.PROXY_BY_APP;
 
 public final class OAuth2ResourceAdminAppProxyAuthenticationConverter implements AuthenticationConverter {
     @Nullable

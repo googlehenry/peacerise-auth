@@ -31,8 +31,8 @@ import org.springframework.security.oauth2.server.authorization.settings.TokenSe
 import org.springframework.security.oauth2.server.authorization.token.*
 import com.peacerise.identity.auth.extend.password.OAuth2ResourceOwnerPasswordCredentialsAuthenticationConverter
 import com.peacerise.identity.auth.extend.password.OAuth2ResourceOwnerPasswordCredentialsAuthenticationProvider
-import com.peacerise.identity.auth.extend.proxy.OAuth2ResourceAdminAppProxyAuthenticationConverter
-import com.peacerise.identity.auth.extend.proxy.OAuth2ResourceAdminAppProxyAuthenticationProvider
+import com.peacerise.identity.auth.extend.proxybyapp.OAuth2ResourceAdminAppProxyAuthenticationConverter
+import com.peacerise.identity.auth.extend.proxybyapp.OAuth2ResourceAdminAppProxyAuthenticationProvider
 import com.peacerise.identity.auth.extend.proxybyuser.OAuth2ResourceAdminUserProxyAuthenticationConverter
 import com.peacerise.identity.auth.extend.proxybyuser.OAuth2ResourceAdminUserProxyAuthenticationProvider
 import org.springframework.security.web.SecurityFilterChain

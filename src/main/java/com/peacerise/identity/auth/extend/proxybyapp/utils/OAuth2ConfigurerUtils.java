@@ -1,4 +1,4 @@
-package com.peacerise.identity.auth.extend.proxy.utils;
+package com.peacerise.identity.auth.extend.proxybyapp.utils;
 
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;

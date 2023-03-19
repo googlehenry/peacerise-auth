@@ -1,4 +1,4 @@
-package com.peacerise.identity.auth.extend.proxy;
+package com.peacerise.identity.auth.extend.proxybyapp;
 
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;

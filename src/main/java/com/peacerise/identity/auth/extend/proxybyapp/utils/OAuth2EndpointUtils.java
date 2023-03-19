@@ -1,4 +1,4 @@
-package com.peacerise.identity.auth.extend.proxy.utils;
+package com.peacerise.identity.auth.extend.proxybyapp.utils;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;

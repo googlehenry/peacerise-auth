@@ -1,5 +1,5 @@
-package com.peacerise.identity.auth.extend.proxy;
-import com.peacerise.identity.auth.extend.proxy.utils.OAuth2ConfigurerUtils;
+package com.peacerise.identity.auth.extend.proxybyapp;
+import com.peacerise.identity.auth.extend.proxybyapp.utils.OAuth2ConfigurerUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -7,8 +7,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
