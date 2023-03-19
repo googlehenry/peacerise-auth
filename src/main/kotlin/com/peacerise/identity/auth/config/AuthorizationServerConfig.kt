@@ -25,12 +25,12 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer
-import com.peacerise.identity.auth.extend.password.OAuth2ResourceOwnerPasswordCredentialsAuthenticationProviderBuilder
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings
 import org.springframework.security.oauth2.server.authorization.token.*
 import com.peacerise.identity.auth.extend.password.OAuth2ResourceOwnerPasswordCredentialsAuthenticationConverter
+import com.peacerise.identity.auth.extend.password.OAuth2ResourceOwnerPasswordCredentialsAuthenticationProvider
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
 import java.time.Duration
@@ -57,7 +57,7 @@ class AuthorizationServerConfig {
 
         http.getConfigurer(OAuth2AuthorizationServerConfigurer::class.java).tokenEndpoint {
             it.authenticationProvider(
-                OAuth2ResourceOwnerPasswordCredentialsAuthenticationProviderBuilder(
+                OAuth2ResourceOwnerPasswordCredentialsAuthenticationProvider.Builder(
                     http,
                     userDetailService,
                     passwordEncoder

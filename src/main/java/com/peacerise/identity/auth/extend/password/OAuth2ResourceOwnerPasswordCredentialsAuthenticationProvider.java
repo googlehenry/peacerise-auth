@@ -1,8 +1,10 @@
 package com.peacerise.identity.auth.extend.password;
+import com.peacerise.identity.auth.extend.password.utils.OAuth2ConfigurerUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +35,7 @@ import java.util.*;
 import static com.peacerise.identity.auth.extend.password.utils.OAuth2AuthenticationProviderUtils.getAuthenticatedClientElseThrowInvalidClient;
 
 
-public final class OAuth2ResourceOwnerPasswordCredentialsAuthenticationProvider implements AuthenticationProvider {
+public class OAuth2ResourceOwnerPasswordCredentialsAuthenticationProvider implements AuthenticationProvider {
     private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-4.3";
     private static final OAuth2TokenType ID_TOKEN_TOKEN_TYPE = new OAuth2TokenType(OidcParameterNames.ID_TOKEN);
     private final Log logger = LogFactory.getLog(getClass());
@@ -222,4 +224,28 @@ public final class OAuth2ResourceOwnerPasswordCredentialsAuthenticationProvider 
         return OAuth2ResourceOwnerPasswordCredentialsAuthenticationToken.class.isAssignableFrom(authentication);
     }
 
+    public static class Builder {
+
+        private HttpSecurity httpSecurity;
+        private UserDetailsService userDetailsService;
+        private PasswordEncoder passwordEncoder;
+
+        public Builder(
+                HttpSecurity httpSecurity, UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+            this.httpSecurity = httpSecurity;
+            this.userDetailsService = userDetailsService;
+            this.passwordEncoder = passwordEncoder;
+        }
+
+
+        public OAuth2ResourceOwnerPasswordCredentialsAuthenticationProvider build() {
+            OAuth2AuthorizationService authorizationService = OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
+            OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator = OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
+
+            OAuth2ResourceOwnerPasswordCredentialsAuthenticationProvider resourceOwnerPasswordCredentialsAuthenticationProvider =
+                    new OAuth2ResourceOwnerPasswordCredentialsAuthenticationProvider(authorizationService, tokenGenerator,
+                            userDetailsService, passwordEncoder);
+            return resourceOwnerPasswordCredentialsAuthenticationProvider;
+        }
+    }
 }
