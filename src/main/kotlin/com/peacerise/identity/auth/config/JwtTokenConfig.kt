@@ -2,6 +2,7 @@ package com.peacerise.identity.auth.config
 
 import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.SecurityContext
+import com.peacerise.identity.auth.extend.proxy.OAuth2ResourceAdminAppProxyAuthenticationProvider.PROXY_BY_APP
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.core.Authentication
@@ -56,8 +57,15 @@ class JwtTokenConfig {
             } else if (context.tokenType.value == OidcParameterNames.ID_TOKEN) {
                 // Customize headers/claims for id_token
             }
+
             claims.claim(OAuth2ParameterNames.SCOPE, scopes)
-            claims.claim("type", if(context.authorizationGrantType== AuthorizationGrantType.CLIENT_CREDENTIALS) "APP_TOKEN" else "USER_TOKEN")
+
+            val type = when(context.authorizationGrantType){
+                AuthorizationGrantType.CLIENT_CREDENTIALS -> "APP_TOKEN"
+                AuthorizationGrantType(PROXY_BY_APP) ->"UT_PROXY_BY_APP"
+                else -> "USER_TOKEN"
+            }
+            claims.claim("type", type)
         }
     }
 }

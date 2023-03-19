@@ -73,7 +73,18 @@ curl --location 'localhost:9000/oauth2/token' \
     "token_type": "Bearer"
 }
 ```
+4. Customized Proxy mode as user with app token (安全保护,只支持:login-client)
+```agsl
+curl --location 'localhost:9000/oauth2/token' --header 'Authorization: Basic bG9naW4tY2xpZW50OmxvZ2luLXNlY3JldA==' --form 'grant_type="proxy_by_app"' --form 'username="user1"' --form 'scope="user.data.read user.data.write"'
 
+{
+    "access_token": "eyJraWQiOiJhMjA4MGYyYi00OGQwLTQ4YWYtODE5YS04MTMwYWNmNzRmNjciLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImF1ZCI6ImxvZ2luLWNsaWVudCIsIm5iZiI6MTY3OTIxMTA1Niwic2NvcGUiOlsidXNlci5kYXRhLnJlYWQiLCJ1c2VyLmRhdGEud3JpdGUiXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDAwIiwiZXhwIjoxNjc5MjE4MjU2LCJ0eXBlIjoiVVRfUFJPWFlfQllfQVBQIiwiaWF0IjoxNjc5MjExMDU2fQ.wd9hYkYE-tmNgmrJusKdT0YmCUPLW9igNRVI_Mf8TZ_lfC_ofHY1-JAASaCFq99TYHwYwrGEgg5JGlKWB_JNVn8UrfHw6Ggj3Hvxr_Hthb8E7mJ8Y5z_rOJnCXD_0dfrI-zeN9OUYY1eu2qTXsK3S_SHpDSrCpUe-Nsl0Q0MfyinGkFUrMYsEFTnGK50aeHYNrjm-zmdX8VOFOW4gaUG9NzHo8Dm6ScH3fTPe_vJnUJceAsGqWl6K5u1vsZRdDk9l_AzMOZEvkgQ2yE6PH9Mn6Z8eVbd6vcAEfkikttHzfbT_TdtvuVvKEdEZHHPnv6KUivFgq7x28-h53fATmYIRg",
+    "expires_in": 7200,
+    "refresh_token": "mRccJE76o20sO_J6aTFT4fryGP4hUrWEvBrex-H1e6lTElPvcHWmpvfR9cBWDITEVPK13HOcqLtLN2a2hHb9-uAQoXf6ETlsAIXZ2X11quLmtc8pIX3IzrjJRFV2FQZe",
+    "scope": "user.data.read user.data.write",
+    "token_type": "Bearer"
+}
+```
 
 #### Spring Security Architecture (https://docs.spring.io/spring-security/reference/servlet/architecture.html)
 
