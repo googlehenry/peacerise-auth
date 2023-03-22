@@ -163,10 +163,10 @@ class AuthorizationServerConfig {
 
     @Bean
     fun jwkSource(): JWKSource<SecurityContext?>? {
-        val rsaKey: RSAKey = KeyStoreConfig.loadKeyPairFromKeyStore()
+        val rsaKey: List<RSAKey> = KeyStoreConfig.loadKeyPairFromKeyStore()
         val jwkSet = JWKSet(rsaKey)
 
-        println(jwkSet.toPublicJWKSet().toString(true))
+        //println(jwkSet.toPublicJWKSet().toString(true))
         return JWKSource { jwkSelector: JWKSelector, securityContext: SecurityContext? ->
             jwkSelector.select(
                 jwkSet

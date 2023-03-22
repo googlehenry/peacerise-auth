@@ -2,6 +2,7 @@ package com.peacerise.auth.config
 
 import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.SecurityContext
+import com.peacerise.auth.config.KeyStoreConfig.Companion.live_key_pair_id
 import com.peacerise.auth.extend.proxybyapp.OAuth2ResourceAdminAppProxyAuthenticationProvider.PROXY_BY_APP
 import com.peacerise.auth.extend.proxybyuser.OAuth2ResourceAdminUserProxyAuthenticationProvider.PROXY_BY_USER
 import org.springframework.context.annotation.Bean
@@ -50,7 +51,8 @@ class JwtTokenConfig {
             val headers: JwsHeader.Builder = context.jwsHeader
             val claims = context.claims
             val scopes = context.authorizedScopes.map { it }.toMutableSet()
-
+            //使用最新的key-pair来加密(key-rotate), 这里设置之后, jwtkeymatcher会使用这个id来匹配签名.
+            headers.keyId(live_key_pair_id)
 
             val principal = context.getPrincipal<Authentication>()
             if (context.tokenType == OAuth2TokenType.ACCESS_TOKEN) {
